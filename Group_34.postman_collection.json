@@ -275,7 +275,7 @@
 			"name": "HW_#2",
 			"item": [
 				{
-					"name": "first",
+					"name": "/first",
 					"event": [
 						{
 							"listen": "test",
@@ -325,7 +325,7 @@
 					"response": []
 				},
 				{
-					"name": "user_info_3",
+					"name": "/user_info_3",
 					"event": [
 						{
 							"listen": "test",
@@ -427,7 +427,7 @@
 					"response": []
 				},
 				{
-					"name": "object_info_3",
+					"name": "/object_info_3",
 					"event": [
 						{
 							"listen": "test",
@@ -524,7 +524,7 @@
 					"response": []
 				},
 				{
-					"name": "object_info_4",
+					"name": "/object_info_4",
 					"event": [
 						{
 							"listen": "test",
@@ -585,8 +585,14 @@
 									"});\r",
 									"\r",
 									"//15. Создать в окружении переменную name\r",
+									"pm.environment.set(\"name\");\r",
+									"\r",
 									"//16. Создать в окружении переменную age\r",
+									"pm.environment.set(\"age\");\r",
+									"\r",
 									"//17. Создать в окружении переменную salary\r",
+									"pm.environment.set(\"salary\");\r",
+									"\r",
 									"//18. Передать в окружение переменную name\r",
 									"pm.environment.set(\"name\", request_params.name);\r",
 									"\r",
@@ -597,9 +603,6 @@
 									"pm.environment.set(\"salary\", request_params.salary);\r",
 									"\r",
 									"//21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.\r",
-									"//for (i = 0; i <= responseJson.salary.length - 1; i++) {\r",
-									"//\tconsole.log(responseJson.salary[i]);\r",
-									"//}\r",
 									"\r",
 									"for (i in responseJson.salary) {\r",
 									"\tconsole.log(responseJson.salary[i]);\r",
@@ -644,7 +647,7 @@
 					"response": []
 				},
 				{
-					"name": "user_info_2",
+					"name": "/user_info_2",
 					"event": [
 						{
 							"listen": "test",
@@ -797,7 +800,7 @@
 			"name": "HW_#3",
 			"item": [
 				{
-					"name": "login",
+					"name": "/login",
 					"event": [
 						{
 							"listen": "test",
@@ -805,7 +808,8 @@
 								"exec": [
 									"var jsonData = pm.response.json();\r",
 									"\r",
-									"pm.environment.set(\"auth_token\", jsonData.token);"
+									"pm.environment.set(\"auth_token\"); //Создаем переменную в окружении\r",
+									"pm.environment.set(\"auth_token\", jsonData.token); //Задаем значение"
 								],
 								"type": "text/javascript"
 							}
@@ -847,7 +851,7 @@
 					"response": []
 				},
 				{
-					"name": "user_info",
+					"name": "/user_info",
 					"event": [
 						{
 							"listen": "test",
@@ -909,7 +913,7 @@
 									"});\r",
 									"\r",
 									"//pm.test('Schema is valid', function () {\r",
-									"//    pm.expect(tv4.validate(responseJson, schema)).to.be.true;\r",
+									"//    pm.expect(tv4.validate(responseJson, schema)).to.be.true; //Вариант через тини валидатор (мало информативный)\r",
 									"//});\r",
 									"\r",
 									"// 3) В ответе указаны коэффициенты умножения salary, напишите тесты по проверке правильности результата перемножения на коэффициент.\r",
@@ -925,15 +929,12 @@
 									"    pm.expect(responseJson.qa_salary_after_6_months).to.eql(+request_data_raw.salary * 2);\r",
 									"});\r",
 									"\r",
-									"pm.test(\"Check start_qa_salary = request salary\", function () {\r",
-									"    pm.expect(responseJson.start_qa_salary).to.eql(+request_data_raw.salary);\r",
-									"});\r",
-									"\r",
 									"// 4) Достать значение из поля 'u_salary_1.5_year' и передать в поле salary запроса http://162.55.220.72:5005/get_test_user\r",
 									"//Через окружение\r",
+									"pm.environment.set(\"u_salary_1_5_year\")\r",
 									"pm.environment.set(\"u_salary_1_5_year\", responseJson.person.u_salary_1_5_year)\r",
 									"\r",
-									"//Напрямую в запрос тестов\r",
+									"//Напрямую в запрос из тестов\r",
 									"pm.sendRequest({\r",
 									"    url: \"http://162.55.220.72:5005/get_test_user\",\r",
 									"    method: 'POST',\r",
@@ -941,7 +942,7 @@
 									"        mode: 'urlencoded',\r",
 									"        urlencoded: [\r",
 									"            {key: 'age', value: responseJson.person.u_age},\r",
-									"            {key: 'salary', value: responseJson.person.u_salary_1_5_year},\r",
+									"            {key: 'salary', value: responseJson.person.u_salary_1_5_year}, // <---\r",
 									"            {key: 'name', value: responseJson.person.u_name},\r",
 									"            {key: 'auth_token', value: request_data_raw.auth_token},\r",
 									"            ]\r",
@@ -959,7 +960,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"age\": \"{{age}}\",\r\n\"salary\": \"{{salary}}\",\r\n\"name\": \"{{name}}\",\r\n\"auth_token\": \"{{auth_token}}\"\r\n}",
+							"raw": "{\r\n    \"age\": \"{{age}}\",\r\n    \"salary\": \"{{salary}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"auth_token\": \"{{auth_token}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -984,7 +985,7 @@
 					"response": []
 				},
 				{
-					"name": "new_data",
+					"name": "/new_data",
 					"event": [
 						{
 							"listen": "test",
@@ -1039,12 +1040,9 @@
 									"});\r",
 									"\r",
 									"//4) проверить, что 2-й элемент массива salary больше 1-го и 0-го\r",
-									"pm.test(\"Check salary[2] > salary[1]\", function () {\r",
+									"pm.test(\"Check salary[2] > salary[1] and salary[0]\", function () {\r",
 									"    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[1]);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Check salary[2] > salary[0]\", function () {\r",
-									"    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[0]);\r",
+									"    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[0]);    \r",
 									"});\r",
 									"\r",
 									"\r",
@@ -1063,17 +1061,17 @@
 							"formdata": [
 								{
 									"key": "age",
-									"value": "{{age}}",
+									"value": "42",
 									"type": "text"
 								},
 								{
 									"key": "salary",
-									"value": "{{salary}}",
+									"value": "500",
 									"type": "text"
 								},
 								{
 									"key": "name",
-									"value": "{{name}}",
+									"value": "Oleksandr",
 									"type": "text"
 								},
 								{
@@ -1101,7 +1099,7 @@
 					"response": []
 				},
 				{
-					"name": "test_pet_info",
+					"name": "/test_pet_info",
 					"event": [
 						{
 							"listen": "test",
@@ -1166,17 +1164,17 @@
 							"formdata": [
 								{
 									"key": "age",
-									"value": "{{age}}",
+									"value": "42",
 									"type": "text"
 								},
 								{
 									"key": "weight",
-									"value": "{{weight}}",
+									"value": "79",
 									"type": "text"
 								},
 								{
 									"key": "name",
-									"value": "{{name}}",
+									"value": "Oleksandr",
 									"type": "text"
 								},
 								{
@@ -1204,7 +1202,7 @@
 					"response": []
 				},
 				{
-					"name": "get_test_user",
+					"name": "/get_test_user",
 					"event": [
 						{
 							"listen": "test",
@@ -1268,7 +1266,7 @@
 									"\r",
 									"//4) Проверить что занчение поля age в ответе соответсвует отправленному в запросе значению поля age\r",
 									"pm.test(\"response age = request age\", function () {\r",
-									"    pm.expect(+responseJson.age).to.eql(+request_data.age);\r",
+									"    pm.expect(responseJson.age).to.eql(request_data.age);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1283,7 +1281,7 @@
 							"formdata": [
 								{
 									"key": "age",
-									"value": "{{age}}",
+									"value": "42",
 									"type": "text"
 								},
 								{
@@ -1293,7 +1291,7 @@
 								},
 								{
 									"key": "name",
-									"value": "{{name}}",
+									"value": "Oleksandr",
 									"type": "text"
 								},
 								{
@@ -1321,7 +1319,7 @@
 					"response": []
 				},
 				{
-					"name": "currency",
+					"name": "/currency",
 					"event": [
 						{
 							"listen": "test",
@@ -1335,6 +1333,7 @@
 									"function getRandomIntInclusive(min, max) {\r",
 									"  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются\r",
 									"}\r",
+									"\r",
 									"// Записываем значение Cur_ID рандомного объекта в переменную окружения\r",
 									"pm.environment.set(\"Cur_ID\", responseJson[getRandomIntInclusive(0, Object.keys(responseJson).length - 1)].Cur_ID);\r",
 									"\r",
@@ -1375,15 +1374,12 @@
 					"response": []
 				},
 				{
-					"name": "curr_byn",
+					"name": "/curr_byn",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"// Парсинг ответа\r",
-									"var responseJson = pm.response.json();\r",
-									"\r",
 									"//1) Статус код 200\r",
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(200);\r",
@@ -1467,7 +1463,7 @@
 					"response": []
 				},
 				{
-					"name": "currency ***",
+					"name": "/currency ***",
 					"event": [
 						{
 							"listen": "test",
