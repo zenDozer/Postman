@@ -41,6 +41,12 @@ pm.test("Body matches string", function () {
 **1. Отправить запрос.**
 
 - POST
+```
+Body form-data:
+name: Oleksandr
+age: 42
+salary: 500
+```
 - response:
 ```json
 {
@@ -461,7 +467,6 @@ name: {{name}}
 age: {{age}}
 salary: {{salary}}
 ```
-
 - response:
 ```json
 {
