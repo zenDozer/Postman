@@ -8,12 +8,14 @@ IP: 162.55.220.72
 Port: 5005
 ```
 
+************
+
 ### EP_1
 - Method: GET
 - EndPoint: /get_method
 - request url params: 
-    name: str
-    age: int
+    <br>name: str
+    <br>age: int
 
 ```
 url params:
@@ -38,9 +40,9 @@ http://162.55.220.72:5005/get_method?name=Oleksandr&age=42
 - Method: POST
 - EndPoint: /user_info_3
 - request form data: 
-    name: str
-    age: int
-    salary: int
+    <br>name: str
+    <br>age: int
+    <br>salary: int
 
 ```
 http://162.55.220.72:5005/user_info_3
@@ -79,9 +81,9 @@ salary: 500
 - Method: GET
 - EndPoint: /object_info_1
 - request url params: 
-    name: str
-    age: int
-    weight: int
+    <br>name: str
+    <br>age: int
+    <br>weight: int
 
  ```
 http://162.55.220.72:5005/object_info_1?name=Oleksandr&age=42&weight=81
@@ -103,9 +105,9 @@ http://162.55.220.72:5005/object_info_1?name=Oleksandr&age=42&weight=81
 - Method: GET
 - EndPoint: /object_info_2
 - request url params: 
-    name: str
-    age: int
-    salary: int
+    <br>name: str
+    <br>age: int
+    <br>salary: int
 
 ```
 url params:
@@ -143,9 +145,9 @@ http://162.55.220.72:5005/object_info_2?name=Oleksandr&age=42&salary=500
 - Method: GET
 - EndPoint: /object_info_3
 - request url params: 
-    name: str
-    age: int
-    salary: int
+    <br>name: str
+    <br>age: int
+    <br>salary: int
 
 ```
 url params:
@@ -196,9 +198,9 @@ http://162.55.220.72:5005/object_info_3?name=Oleksandr&age=42&salary=500
 - Method: GET
 - EndPoint: /object_info_4
 - request url params: 
-    name: str
-    age: int
-    salary: int
+    <br>name: str
+    <br>age: int
+    <br>salary: int
 
 ```
 url params:
@@ -230,9 +232,9 @@ http://162.55.220.72:5005/object_info_4?name=Oleksandr&age=42&salary=500
 - Method: POST
 - EndPoint: /user_info_2
 - request form data: 
-    name: str
-    age: int
-    salary: int
+    <br>name: str
+    <br>age: int
+    <br>salary: int
 
 ```
 http://162.55.220.72:5005/user_info_2
