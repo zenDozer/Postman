@@ -655,7 +655,7 @@ currency.forEach((item) => {
             mode: 'formdata',
             formdata: [
                 {key: 'auth_token', value: pm.environment.get("auth_token")},
-                {key: 'curr_code', value: item.Cur_ID},
+                {key: 'curr_code', value: String(item.Cur_ID)},
                 ]
         }
         }, function (err, response) {

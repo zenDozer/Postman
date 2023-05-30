@@ -217,16 +217,18 @@ var responseJson = pm.response.json();
 **4. Спарсить request.**
 
 ```js
-var request_data = pm.request.toJSON() // Весь ответ
+// Весь ответ
+var request_data = pm.request.toJSON()
+// Парсим только параметры
 var request_params = {};
-pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value}); // Парсим только параметры
+pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value});
 ```
 
 **5. Проверить, что name в ответе равно name s request (name забрать из request.)**
 
 ```js
 pm.test("Check name = request name", function () {
-    pm.expect(responseJson.name).to.eql(request_params.name);
+    pm.expect(responseJson.name).to.eql(pm.request.url.query.get('name'));
 });
 ```
 
@@ -234,7 +236,7 @@ pm.test("Check name = request name", function () {
 
 ```js
 pm.test("Check age = request age", function () {
-    pm.expect(+responseJson.age).to.eql(+request_params.age);
+    pm.expect(+responseJson.age).to.eql(+pm.request.url.query.get('age'));
 });
 ```
 
@@ -242,7 +244,7 @@ pm.test("Check age = request age", function () {
 
 ```js
 pm.test("Check salary = request salary", function () {
-    pm.expect(+responseJson.salary).to.eql(+request_params.salary);
+    pm.expect(+responseJson.salary).to.eql(+pm.request.url.query.get('salary'));
 });
 ```
 
