@@ -1,8 +1,8 @@
-# :large_orange_diamond: Конспект Postman :large_orange_diamond:
+# :large_blue_diamond: Конспект Postman :large_blue_diamond:
 
 ************
 
-## Парсинг
+## :one: Парсинг
 
 - ***Парсинг ответа (response) в json (form data):***
 ```js
@@ -35,7 +35,7 @@ pm.request.url.query.all().forEach((param) => {request_params[param.key] = param
 
 ************
 
-## Тесты
+## :two: Тесты
 
 - ***Проверка статус кода:***
 ```js
@@ -268,7 +268,7 @@ pm.test('Schema is valid', function() {
 
 ************
 
-## Окружение (Environment)
+## :three: Окружение (Environment)
 
 - ***Проверка текущего окружения***
 ```js
@@ -294,7 +294,7 @@ pm.environment.get("name");
 ```
 
 ************
-## Консоль
+## :four: Консоль
 
 ```js
 //Вы можете записать значение переменной или свойства ответа:
@@ -307,7 +307,7 @@ console.log(typeof pm.response.json().id);
 
 ************
 
-## Запросы
+## :five: Запросы
 
 ```js
 pm.sendRequest({
@@ -327,7 +327,7 @@ pm.sendRequest({
 
 ************
 
-## JavaScript
+## :six: JavaScript
 
 - ***Массивы, объекты***
 ```js
