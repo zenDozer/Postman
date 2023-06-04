@@ -4,27 +4,27 @@
 
 ## Парсинг
 
-***Парсинг ответа (response) в json (form data):***
+- Парсинг ответа (response) в json (form data):
 ```js
 var responseJson = JSON.parse(responseBody);
 ```
 
-***ПДля разбора XML используйте следующее:***
+- Для разбора XML используйте следующее:
 ```js
 var responseJson = xml2Json(pm.response.text());
 ```
 
-***Парсинг запроса (request) в json (form data):***
+- Парсинг запроса (request) в json (form data):
 ```js
 var request_data = request.data;
 ```
 
-***Парсинг запроса (request) в json (raw data):***
+- Парсинг запроса (request) в json (raw data):
 ```js
 request_data_raw = JSON.parse(request.data);
 ```
 
-***Парсинг запроса (request) GET (url params) и отдельно параметры:***
+- Парсинг запроса (request) GET (url params) и отдельно параметры:
 ```js
 // Весь ответ
 var request_data = pm.request.toJSON()
