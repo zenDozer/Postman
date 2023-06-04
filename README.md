@@ -9,6 +9,11 @@
 var responseJson = JSON.parse(responseBody);
 ```
 
+***ПДля разбора XML используйте следующее:***
+```js
+var responseJson = xml2Json(pm.response.text());
+```
+
 ***Парсинг запроса (request) в json (form data):***
 ```js
 var request_data = request.data;
@@ -30,12 +35,51 @@ pm.request.url.query.all().forEach((param) => {request_params[param.key] = param
 
 ************
 
-## Проверки
+## Тесты
 
 ***Проверка статус кода:***
 ```js
 pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
+});
+
+//Проверка нескольких кодов
+pm.test("Successful POST request", () => {
+  pm.expect(pm.response.code).to.be.oneOf([201,202]);
+});
+```
+
+***Тестирование заголовков***
+```js
+//Вы можете проверить наличие заголовка ответа:
+pm.test("Content-Type header is present", () => {
+  pm.response.to.have.header("Content-Type");
+});
+
+//Вы также можете проверить заголовок ответа, имеющий определенное значение:
+pm.test("Content-Type header is application/json", () => {
+  pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');
+});
+```
+
+***Тестирование файлов cookie***
+```js
+//Вы можете проверить, присутствует ли файл cookie в ответе:
+pm.test("Cookie JSESSIONID is present", () => {
+  pm.expect(pm.cookies.has('JSESSIONID')).to.be.true;
+});
+
+//Вы также можете проверить наличие определенного значения файла cookie:
+pm.test("Cookie isLoggedIn has value 1", () => {
+  pm.expect(pm.cookies.get('isLoggedIn')).to.eql('1');
+});
+``` 
+
+***Тестирование времени отклика***
+```js
+//Вы можете проверить, чтобы время отклика находилось в заданном диапазоне:
+pm.test("Response time is less than 200ms", () => {
+  pm.expect(pm.response.responseTime).to.be.below(200);
 });
 ```
 
@@ -44,12 +88,16 @@ pm.test("Status code is 200", function () {
 pm.test("Body is correct", function () {
     pm.response.to.have.body("Text");
 });
+
+pm.test("Body contains string",() => {
+  pm.expect(pm.response.text()).to.include("customer_id");
+});
 ```
 
 ***Проверка на равенство:***
 ```js
 pm.test("Check name", function () {
-    pm.expect(responseJson.name).to.eql("Oleksandr"); //Указано вручную
+    pm.expect(responseJson.name).to.eql("name"); //Указано вручную
 });
 
 pm.test("Check name = request name", function () {
@@ -61,6 +109,32 @@ pm.test("Check name = request name", function () {
 });
 ```
 
+***Проверка на больше или меньше:***
+```js
+pm.test("Check salary[2] > salary[1] and salary[0]", function () {
+    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[1]);
+});
+
+pm.test("Billing amount is less than 2500", function(){
+    pm.expect(jsonData.data.bill<2500)
+});
+
+pm.test("Billing amount is less than 2500", function(){
+    pm.expect(jsonData.data.bill).to.be.below(2500)
+});
+```
+
+***Использование нескольких утверждений:***
+```js
+pm.test("The response has all properties", () => {
+    // разобрать json ответ и проверить три свойства
+    const responseJson = pm.response.json();
+    pm.expect(responseJson.type).to.eql('vip');
+    pm.expect(responseJson.name).to.be.a('string');
+    pm.expect(responseJson.id).to.have.lengthOf(1);
+});
+```
+
 ***Проверка на наличие параметра:***
 ```js
 pm.test("Dog has param name", function () {
@@ -68,9 +142,141 @@ pm.test("Dog has param name", function () {
 });
 ```
 
+***Проверка типа значения***
+```js
+/* ответ имеет такую структуру:
+{
+  "name": "Jane",
+  "age": 29,
+  "hobbies": [
+    "skating",
+    "painting"
+  ],
+  "email": null
+}
+*/
+const jsonData = pm.response.json();
+pm.test("Test data type of the response", () => {
+  pm.expect(jsonData).to.be.an("object");
+  pm.expect(jsonData.name).to.be.a("string");
+  pm.expect(jsonData.age).to.be.a("number");
+  pm.expect(jsonData.hobbies).to.be.an("array");
+  pm.expect(jsonData.website).to.be.undefined;
+  pm.expect(jsonData.email).to.be.null;
+});
+```
+
+***Проверка свойств массива***
+```js
+/*
+ответ имеет такую структуру:
+{
+  "errors": [],
+  "areas": ["goods", "services"],
+  "settings": [
+    {
+      "type": "notification",
+      "detail": ["email", "sms"]
+    },
+    {
+      "type": "visual",
+      "detail": ["light", "large"]
+    }
+  ]
+}
+*/
+
+const jsonData = pm.response.json();
+pm.test("Test array properties", () => {
+    //массив ошибок пуст
+  pm.expect(jsonData.errors).to.be.empty;
+    //массив включает в себя "товары"
+  pm.expect(jsonData.areas).to.include("goods");
+    
+  //получить объект настроек уведомлений
+  const notificationSettings = jsonData.settings.find
+      (m => m.type === "notification");
+  pm.expect(notificationSettings).to.be.an("object", "Could not find the setting");
+    //массив "detail" должен включать "sms"
+  pm.expect(notificationSettings.detail).to.include("sms");
+    //массив "detail" должен включать все перечисленные элементы
+  pm.expect(notificationSettings.detail).to.have.members(["email", "sms"]);
+});
+```
+
+***Проверка свойств объекта***
+```js
+//Вы можете проверить, что объект содержит ключи или свойства.
+pm.expect({a: 1, b: 2}).to.have.all.keys('a', 'b');
+pm.expect({a: 1, b: 2}).to.have.any.keys('a', 'b');
+pm.expect({a: 1, b: 2}).to.not.have.any.keys('c', 'd');
+pm.expect({a: 1}).to.have.property('a');
+pm.expect({a: 1, b: 2}).to.be.an('object').that.has.all.keys('a', 'b');
+```
+
+***Проверка, что значение находится в наборе***
+```js
+//Вы можете проверить значение ответа по списку допустимых параметров.
+pm.test("Value is in valid list", () => {
+  pm.expect(pm.response.json().type).to.be.oneOf(["Subscriber", "Customer", "User"]);
+});
+```
+
+***Проверка структуры json в ответе (https://www.jsonschema.net):***
+```js
+var schema = {
+    "type": "object",
+    "required": [
+        "Param1",
+        "Param2",
+        "Param3",
+    ],
+    "properties": {
+        "Param1": {
+            "type": "object",
+            "required": [
+                "Param1_1",
+                "Param1_2",
+                "Param1_3"
+            ],
+            "properties": {
+                "Param1_1": {
+                    "type": "integer",
+                },
+                "Param1_2": {
+                    "type": "array",
+                    "minItems": 3,
+                },
+                "Param1_3": {
+                    "type": "integer",
+                }
+            },
+        },
+        "Param2": {
+            "type": "number",
+        },
+        "Param3": {
+            "type": "integer",
+        },
+    },
+}
+
+pm.test('Schema is valid', function() {
+  pm.response.to.have.jsonSchema(schema);
+});
+```
+
 ************
 
 ## Окружение (Environment)
+
+***Проверка текущего окружения***
+```js
+//Вы можете проверить активную (выбранную в данный момент) среду в Postman.
+pm.test("Check the active environment", () => {
+  pm.expect(pm.environment.name).to.eql("Production");
+});
+```
 
 ***Создать в окружении переменную:***
 ```js
@@ -85,6 +291,39 @@ pm.environment.set("name", request_params.name);
 ***Получить значение переменной из окружения:***
 ```js
 pm.environment.get("name");
+```
+
+************
+## Консоль
+
+```js
+//Вы можете записать значение переменной или свойства ответа:
+console.log(pm.collectionVariables.get("name"));
+console.log(pm.response.json().name);
+
+//Вы можете записать тип переменной или свойства ответа:
+console.log(typeof pm.response.json().id);
+```
+
+************
+
+## Запросы
+
+***Создать в окружении переменную:***
+```js
+pm.sendRequest({
+    url: "http://54.157.99.22:80/curr_byn",
+    method: 'POST',
+    body: {
+        mode: 'formdata',
+        formdata: [
+            {key: 'auth_token', value: pm.environment.get("auth_token")},
+            {key: 'curr_code', value: pm.environment.get("Cur_ID")},
+            ]
+    }
+    }, function (err, response) {
+    console.log(response.json())
+});
 ```
 
 ************

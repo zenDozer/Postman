@@ -23,10 +23,10 @@ password: 123qweasd
 **дальше все запросы требуют наличие токена.**
 
 ```js
-var jsonData = JSON.parse(responseBody);
+var responseJson = JSON.parse(responseBody);
 
 pm.environment.set("auth_token"); //Создаем переменную в окружении
-pm.environment.set("auth_token", jsonData.token); //Задаем значение
+pm.environment.set("auth_token", responseJson.token); //Задаем значение
 ```
 
 ************
@@ -160,12 +160,12 @@ pm.sendRequest({
     url: "http://162.55.220.72:5005/get_test_user",
     method: 'POST',
     body: {
-        mode: 'urlencoded',
-        urlencoded: [
-            {key: 'age', value: responseJson.person.u_age},
-            {key: 'salary', value: responseJson.person.u_salary_1_5_year}, // <---
-            {key: 'name', value: responseJson.person.u_name},
-            {key: 'auth_token', value: request_data_raw.auth_token},
+        mode: 'formdata',
+        formdata: [
+            {key: 'age', value: 42},
+            {key: 'salary', value: pm.environment.get("u_salary_1_5_year")}, // <---
+            {key: 'name', value: 'Oleksandr'},
+            {key: 'auth_token', value: pm.environment.set("auth_token")},
             ]
     }
     }, function (err, response) {

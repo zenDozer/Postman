@@ -11,6 +11,17 @@
 			"item": [
 				{
 					"name": "EP_1 /get_method",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -85,6 +96,17 @@
 				},
 				{
 					"name": "EP_3 /object_info_1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -379,7 +401,9 @@
 									"// 12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)\r",
 									"pm.test(\"Check user_salary_1_5_year = request * 4\", function () {\r",
 									"    pm.expect(responseJson.family.u_salary_1_5_year).to.eql(request_data.salary*4);\r",
-									"});"
+									"});\r",
+									"\r",
+									"console.log(typeof responseJson.family);"
 								],
 								"type": "text/javascript"
 							}
@@ -807,10 +831,10 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"pm.environment.set(\"auth_token\"); //Создаем переменную в окружении\r",
-									"pm.environment.set(\"auth_token\", jsonData.token); //Задаем значение"
+									"pm.environment.set(\"auth_token\", responseJson.token); //Задаем значение"
 								],
 								"type": "text/javascript"
 							}
@@ -940,12 +964,12 @@
 									"    url: \"http://162.55.220.72:5005/get_test_user\",\r",
 									"    method: 'POST',\r",
 									"    body: {\r",
-									"        mode: 'urlencoded',\r",
-									"        urlencoded: [\r",
-									"            {key: 'age', value: responseJson.person.u_age},\r",
-									"            {key: 'salary', value: responseJson.person.u_salary_1_5_year}, // <---\r",
-									"            {key: 'name', value: responseJson.person.u_name},\r",
-									"            {key: 'auth_token', value: request_data_raw.auth_token},\r",
+									"        mode: 'formdata',\r",
+									"        formdata: [\r",
+									"            {key: 'age', value: 42},\r",
+									"            {key: 'salary', value: pm.environment.get(\"u_salary_1_5_year\")}, // <---\r",
+									"            {key: 'name', value: 'Oleksandr'},\r",
+									"            {key: 'auth_token', value: pm.environment.set(\"auth_token\")},\r",
 									"            ]\r",
 									"    }\r",
 									"    }, function (err, response) {\r",
@@ -1466,7 +1490,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"//***\r",
 									"//1) получить список валют\r",
 									"var currency = JSON.parse(responseBody);\r",
 									"\r",
