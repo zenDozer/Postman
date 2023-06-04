@@ -80,7 +80,7 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = pm.response.json();
+var responseJson = JSON.parse(responseBody);
 ```
 
 **4. Проверить, что name в ответе равно name s request (name вбить руками.)**
@@ -211,7 +211,7 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = pm.response.json();
+var responseJson = JSON.parse(responseBody);
 ```
 
 **4. Спарсить request.**
@@ -327,7 +327,7 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = pm.response.json();
+var responseJson = JSON.parse(responseBody);
 ```
 
 **4. Спарсить request.**
@@ -500,7 +500,7 @@ pm.test("Status code is 200", function () {
 **6. Спарсить response body в json.**
 
 ```js
-var responseJson = pm.response.json();
+var responseJson = JSON.parse(responseBody);
 ```
 
 **7. Спарсить request.**

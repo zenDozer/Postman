@@ -297,8 +297,7 @@
 									"//проверяем тип данных string\r",
 									"pm.test(\"Body matches string\", function () {\r",
 									"    pm.expect(pm.response.text()).to.be.a(\"string\")\r",
-									"});\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -339,7 +338,7 @@
 									"});\r",
 									"\r",
 									"// 3. Спарсить response body в json.\r",
-									"var responseJson = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"// 4. Проверить, что name в ответе равно name s request (name вбить руками.)\r",
 									"pm.test(\"Check name\", function () {\r",
@@ -440,7 +439,7 @@
 									"});\r",
 									"\r",
 									"// 3. Спарсить response body в json.\r",
-									"var responseJson = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"// 4. Спарсить request.\r",
 									"// Весь ответ\r",
@@ -479,12 +478,12 @@
 									"\r",
 									"// 11. Проверить, что параметр name имеет значение Luky.\r",
 									"pm.test(\"Dog name = Luky\", function () {\r",
-									"    pm.expect(responseJson.family.pets.dog.name).to.equal('Luky');\r",
+									"    pm.expect(responseJson.family.pets.dog.name).to.eql('Luky');\r",
 									"});\r",
 									"\r",
 									"// 12. Проверить, что параметр age имеет значение 4.\r",
 									"pm.test(\"Dog age = 4\", function () {\r",
-									"    pm.expect(responseJson.family.pets.dog.age).to.equal(4);\r",
+									"    pm.expect(responseJson.family.pets.dog.age).to.eql(4);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -539,7 +538,7 @@
 									"});\r",
 									"\r",
 									"// 3. Спарсить response body в json.\r",
-									"var responseJson = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"// 4. Спарсить request.\r",
 									"var request_data = pm.request.toJSON() // Весь ответ\r",
@@ -665,7 +664,7 @@
 									"});\r",
 									"\r",
 									"// 6. Спарсить response body в json.\r",
-									"var responseJson = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"// 7. Спарсить request.\r",
 									"var request_data = request.data;\r",
@@ -860,8 +859,8 @@
 							"script": {
 								"exec": [
 									"// Парсинг ответа и запроса\r",
-									"var responseJson = pm.response.json();\r",
-									"request_data_raw = JSON.parse(request.data);\r",
+									"var responseJson = JSON.parse(responseBody);\r",
+									"var request_data_raw = JSON.parse(request.data);\r",
 									"\r",
 									"// 1) Статус код 200\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -994,8 +993,8 @@
 							"script": {
 								"exec": [
 									"// Парсинг ответа и запроса\r",
-									"var responseJson = pm.response.json();\r",
-									"request_data = request.data;\r",
+									"var responseJson = JSON.parse(responseBody);\r",
+									"var request_data = request.data;\r",
 									"\r",
 									"//1) Статус код 200\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -1045,11 +1044,7 @@
 									"pm.test(\"Check salary[2] > salary[1] and salary[0]\", function () {\r",
 									"    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[1]);\r",
 									"    pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[0]);    \r",
-									"});\r",
-									"\r",
-									"\r",
-									"\r",
-									""
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -1108,8 +1103,8 @@
 							"script": {
 								"exec": [
 									"// Парсинг ответа и запроса\r",
-									"var responseJson = pm.response.json();\r",
-									"request_data = request.data;\r",
+									"var responseJson = JSON.parse(responseBody);\r",
+									"var request_data = request.data;\r",
 									"\r",
 									"//1) Статус код 200\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -1211,8 +1206,8 @@
 							"script": {
 								"exec": [
 									"// Парсинг ответа и запроса\r",
-									"var responseJson = pm.response.json();\r",
-									"request_data = request.data;\r",
+									"var responseJson = JSON.parse(responseBody);\r",
+									"var request_data = request.data;\r",
 									"\r",
 									"//1) Статус код 200\r",
 									"pm.test(\"Status code is 200\", function () {\r",
@@ -1329,7 +1324,7 @@
 								"exec": [
 									"// 1) Можете взять любой объект из присланного списка, используйте js random. В объекте возьмите Cur_ID и передать через окружение в следующий запрос.\r",
 									"// Парсинг ответа\r",
-									"var responseJson = pm.response.json();\r",
+									"var responseJson = JSON.parse(responseBody);\r",
 									"\r",
 									"//This JavaScript function always returns a random number between min and max (both included):\r",
 									"function getRandomIntInclusive(min, max) {\r",
@@ -1473,7 +1468,7 @@
 								"exec": [
 									"//***\r",
 									"//1) получить список валют\r",
-									"var currency = pm.response.json();\r",
+									"var currency = JSON.parse(responseBody);\r",
 									"\r",
 									"//2) итерировать список валют\r",
 									"currency.forEach((item) => {\r",
