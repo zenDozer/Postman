@@ -4,27 +4,27 @@
 
 ## :one: Парсинг
 
-- ***Парсинг ответа (response) в json (form data):***
+:arrow_forward: ***Парсинг ответа (response) в json (form data):***
 ```js
 var responseJson = JSON.parse(responseBody);
 ```
 
-- ***Для разбора XML используйте следующее:***
+:arrow_forward: ***Для разбора XML используйте следующее:***
 ```js
 var responseJson = xml2Json(pm.response.text());
 ```
 
-- ***Парсинг запроса (request) в json (form data):***
+:arrow_forward:  ***Парсинг запроса (request) в json (form data):***
 ```js
 var request_data = request.data;
 ```
 
-- ***Парсинг запроса (request) в json (raw data):***
+:arrow_forward: ***Парсинг запроса (request) в json (raw data):***
 ```js
 request_data_raw = JSON.parse(request.data);
 ```
 
-- ***Парсинг запроса (request) GET (url params) и отдельно параметры:***
+:arrow_forward: ***Парсинг запроса (request) GET (url params) и отдельно параметры:***
 ```js
 // Весь ответ
 var request_data = pm.request.toJSON()
@@ -37,7 +37,7 @@ pm.request.url.query.all().forEach((param) => {request_params[param.key] = param
 
 ## :two: Тесты
 
-- ***Проверка статус кода:***
+:arrow_forward: ***Проверка статус кода:***
 ```js
 pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
@@ -49,7 +49,7 @@ pm.test("Successful POST request", () => {
 });
 ```
 
-- ***Тестирование заголовков***
+:arrow_forward: ***Тестирование заголовков***
 ```js
 //Вы можете проверить наличие заголовка ответа:
 pm.test("Content-Type header is present", () => {
@@ -62,7 +62,7 @@ pm.test("Content-Type header is application/json", () => {
 });
 ```
 
-- ***Тестирование файлов cookie***
+:arrow_forward: ***Тестирование файлов cookie***
 ```js
 //Вы можете проверить, присутствует ли файл cookie в ответе:
 pm.test("Cookie JSESSIONID is present", () => {
@@ -75,7 +75,7 @@ pm.test("Cookie isLoggedIn has value 1", () => {
 });
 ``` 
 
-- ***Тестирование времени отклика***
+:arrow_forward: ***Тестирование времени отклика***
 ```js
 //Вы можете проверить, чтобы время отклика находилось в заданном диапазоне:
 pm.test("Response time is less than 200ms", () => {
@@ -83,7 +83,7 @@ pm.test("Response time is less than 200ms", () => {
 });
 ```
 
-- ***Проверка на наличие строки в ответе:***
+:arrow_forward: ***Проверка на наличие строки в ответе:***
 ```js
 pm.test("Body is correct", function () {
     pm.response.to.have.body("Text");
@@ -94,7 +94,7 @@ pm.test("Body contains string",() => {
 });
 ```
 
-- ***Проверка на равенство:***
+:arrow_forward: ***Проверка на равенство:***
 ```js
 pm.test("Check name", function () {
     pm.expect(responseJson.name).to.eql("name"); //Указано вручную
@@ -109,7 +109,7 @@ pm.test("Check name = request name", function () {
 });
 ```
 
-- ***Проверка на больше или меньше:***
+:arrow_forward: ***Проверка на больше или меньше:***
 ```js
 pm.test("Check salary[2] > salary[1] and salary[0]", function () {
     pm.expect(+responseJson.salary[2]).to.greaterThan(+responseJson.salary[1]);
@@ -124,7 +124,7 @@ pm.test("Billing amount is less than 2500", function(){
 });
 ```
 
-- ***Использование нескольких утверждений:***
+:arrow_forward: ***Использование нескольких утверждений:***
 ```js
 pm.test("The response has all properties", () => {
     // разобрать json ответ и проверить три свойства
@@ -135,14 +135,14 @@ pm.test("The response has all properties", () => {
 });
 ```
 
-- ***Проверка на наличие параметра:***
+:arrow_forward: ***Проверка на наличие параметра:***
 ```js
 pm.test("Dog has param name", function () {
     pm.expect(responseJson.family.pets.dog).to.have.property('name');
 });
 ```
 
-- ***Проверка типа значения***
+:arrow_forward: ***Проверка типа значения***
 ```js
 /* ответ имеет такую структуру:
 {
@@ -166,7 +166,7 @@ pm.test("Test data type of the response", () => {
 });
 ```
 
-- ***Проверка свойств массива***
+:arrow_forward: ***Проверка свойств массива***
 ```js
 /*
 ответ имеет такую структуру:
@@ -204,7 +204,7 @@ pm.test("Test array properties", () => {
 });
 ```
 
-- ***Проверка свойств объекта***
+:arrow_forward: ***Проверка свойств объекта***
 ```js
 //Вы можете проверить, что объект содержит ключи или свойства.
 pm.expect({a: 1, b: 2}).to.have.all.keys('a', 'b');
@@ -214,7 +214,7 @@ pm.expect({a: 1}).to.have.property('a');
 pm.expect({a: 1, b: 2}).to.be.an('object').that.has.all.keys('a', 'b');
 ```
 
-- ***Проверка, что значение находится в наборе***
+:arrow_forward: ***Проверка, что значение находится в наборе***
 ```js
 //Вы можете проверить значение ответа по списку допустимых параметров.
 pm.test("Value is in valid list", () => {
@@ -222,7 +222,7 @@ pm.test("Value is in valid list", () => {
 });
 ```
 
-- ***Проверка структуры json в ответе (https://www.jsonschema.net):***
+:arrow_forward: ***Проверка структуры json в ответе (https://www.jsonschema.net):***
 ```js
 var schema = {
     "type": "object",
@@ -270,7 +270,7 @@ pm.test('Schema is valid', function() {
 
 ## :three: Окружение (Environment)
 
-- ***Проверка текущего окружения***
+:arrow_forward: ***Проверка текущего окружения***
 ```js
 //Вы можете проверить активную (выбранную в данный момент) среду в Postman.
 pm.test("Check the active environment", () => {
@@ -278,17 +278,17 @@ pm.test("Check the active environment", () => {
 });
 ```
 
-- ***Создать в окружении переменную:***
+:arrow_forward: ***Создать в окружении переменную:***
 ```js
 pm.environment.set("name");
 ```
 
-- ***Передать в окружение переменную:***
+:arrow_forward: ***Передать в окружение переменную:***
 ```js
 pm.environment.set("name", request_params.name);
 ```
 
-- ***Получить значение переменной из окружения:***
+:arrow_forward: ***Получить значение переменной из окружения:***
 ```js
 pm.environment.get("name");
 ```
@@ -296,6 +296,7 @@ pm.environment.get("name");
 ************
 ## :four: Консоль
 
+:arrow_forward: 
 ```js
 //Вы можете записать значение переменной или свойства ответа:
 console.log(pm.collectionVariables.get("name"));
@@ -309,6 +310,7 @@ console.log(typeof pm.response.json().id);
 
 ## :five: Запросы
 
+:arrow_forward: 
 ```js
 pm.sendRequest({
     url: "http://54.157.99.22:80/curr_byn",
@@ -329,7 +331,7 @@ pm.sendRequest({
 
 ## :six: JavaScript
 
-- ***Массивы, объекты***
+:arrow_forward: ***Массивы, объекты***
 ```js
 let r2d2 = [
    [11,22,33],
@@ -359,7 +361,7 @@ console.log(j_son1.computers.comp2)
 console.log(j_son1.family.wife.Children.ch1.age)
 ```
 
-- ***Циклы и Условные ветвления if***
+:arrow_forward: ***Циклы и Условные ветвления if***
 ```js
 let year = 2015;
 
