@@ -28,9 +28,6 @@ request_data_raw = JSON.parse(request.data);
 ```js
 // Весь ответ
 var request_data = pm.request.url.query.toObject();
-// Парсим только параметры
-var request_params = {};
-pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value});
 ```
 
 ************
