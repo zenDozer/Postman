@@ -80,7 +80,7 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 **4. Проверить, что name в ответе равно name s request (name вбить руками.)**
@@ -211,24 +211,21 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 **4. Спарсить request.**
 
 ```js
 // Весь ответ
-var request_data = pm.request.toJSON()
-// Парсим только параметры
-var request_params = {};
-pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value});
+var request_data = pm.request.url.query.toObject();
 ```
 
 **5. Проверить, что name в ответе равно name s request (name забрать из request.)**
 
 ```js
 pm.test("Check name = request name", function () {
-    pm.expect(responseJson.name).to.eql(pm.request.url.query.get('name'));
+    pm.expect(responseJson.name).to.eql(request_data.name);
 });
 ```
 
@@ -236,7 +233,7 @@ pm.test("Check name = request name", function () {
 
 ```js
 pm.test("Check age = request age", function () {
-    pm.expect(+responseJson.age).to.eql(+pm.request.url.query.get('age'));
+    pm.expect(+responseJson.age).to.eql(+request_data.age);
 });
 ```
 
@@ -244,7 +241,7 @@ pm.test("Check age = request age", function () {
 
 ```js
 pm.test("Check salary = request salary", function () {
-    pm.expect(+responseJson.salary).to.eql(+pm.request.url.query.get('salary'));
+    pm.expect(+responseJson.salary).to.eql(+request_data.salary);
 });
 ```
 
@@ -327,22 +324,20 @@ pm.test("Status code is 200", function () {
 **3. Спарсить response body в json.**
 
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 **4. Спарсить request.**
 
 ```js
-var request_data = pm.request.toJSON() // Весь ответ
-var request_params = {};
-pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value}); // Парсим только параметры
+var request_data = pm.request.url.query.toObject();
 ```
 
 **5. Проверить, что name в ответе равно name s request (name забрать из request.)**
 
 ```js
 pm.test("Check name = request name", function () {
-    pm.expect(responseJson.name).to.eql(request_params.name);
+    pm.expect(responseJson.name).to.eql(request_data.name);
 });
 ```
 
@@ -350,14 +345,14 @@ pm.test("Check name = request name", function () {
 
 ```js
 pm.test("Check age = request age", function () {
-    pm.expect(+responseJson.age).to.eql(+request_params.age);
+    pm.expect(+responseJson.age).to.eql(+request_data.age);
 });
 ```
 
 **7. Вывести в консоль параметр salary из request.**
 
 ```js
-console.log(request_params.salary);
+console.log(request_data.salary);
 ```
 
 **8. Вывести в консоль параметр salary из response.**
@@ -388,7 +383,7 @@ console.log(responseJson.salary[2]);
 
 ```js
 pm.test("Check user_salary [0] = request salary", function () {
-    pm.expect(responseJson.salary[0]).to.eql(+request_params.salary);
+    pm.expect(responseJson.salary[0]).to.eql(+request_data.salary);
 });
 ```
 
@@ -396,7 +391,7 @@ pm.test("Check user_salary [0] = request salary", function () {
 
 ```js
 pm.test("Check user_salary [1] = request salary * 2", function () {
-    pm.expect(+responseJson.salary[1]).to.eql(+request_params.salary*2);
+    pm.expect(+responseJson.salary[1]).to.eql(+request_data.salary*2);
 });
 ```
 
@@ -404,7 +399,7 @@ pm.test("Check user_salary [1] = request salary * 2", function () {
 
 ```js
 pm.test("Check user_salary [2] = request salary * 3", function () {
-    pm.expect(+responseJson.salary[2]).to.eql(+request_params.salary*3);
+    pm.expect(+responseJson.salary[2]).to.eql(+request_data.salary*3);
 });
 ```
 
@@ -429,19 +424,19 @@ pm.environment.set("salary");
 **18. Передать в окружение переменную name**
 
 ```js
-pm.environment.set("name", request_params.name);
+pm.environment.set("name", request_data.name);
 ```
 
 **19. Передать в окружение переменную age**
 
 ```js
-pm.environment.set("age", request_params.age);
+pm.environment.set("age", request_data.age);
 ```
 
 **20. Передать в окружение переменную salary**
 
 ```js
-pm.environment.set("salary", request_params.salary);
+pm.environment.set("salary", request_data.salary);
 ```
 
 **21. Написать цикл который выведет в консоль по порядку элементы списка из параметра salary.**
@@ -500,7 +495,7 @@ pm.test("Status code is 200", function () {
 **6. Спарсить response body в json.**
 
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 **7. Спарсить request.**

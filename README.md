@@ -6,7 +6,7 @@
 
 :arrow_forward: ***Парсинг ответа (response) в json (form data):***
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 :arrow_forward: ***Для разбора XML используйте следующее:***
@@ -27,7 +27,7 @@ request_data_raw = JSON.parse(request.data);
 :arrow_forward: ***Парсинг запроса (request) GET (url params) и отдельно параметры:***
 ```js
 // Весь ответ
-var request_data = pm.request.toJSON()
+var request_data = pm.request.url.query.toObject();
 // Парсим только параметры
 var request_params = {};
 pm.request.url.query.all().forEach((param) => {request_params[param.key] = param.value});

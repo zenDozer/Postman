@@ -23,7 +23,7 @@ password: 123qweasd
 **дальше все запросы требуют наличие токена.**
 
 ```js
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 
 pm.environment.set("auth_token"); //Создаем переменную в окружении
 pm.environment.set("auth_token", responseJson.token); //Задаем значение
@@ -71,7 +71,7 @@ pm.environment.set("auth_token", responseJson.token); //Задаем значе�
 **Тесты**
 ```js
 // Парсинг ответа и запроса
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 request_data_raw = JSON.parse(request.data); //преобразование Raw в формат JSON
 ```
 
@@ -207,7 +207,7 @@ auth_token: {{token}}
 **Тесты**
 ```js
 // Парсинг ответа и запроса
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 var request_data = request.data;
 ```
 
@@ -300,7 +300,7 @@ auth_token: {{token}}
 **Тесты**
 ```js
 // Парсинг ответа и запроса
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 var request_data = request.data;
 ```
 
@@ -396,7 +396,7 @@ auth_token: {{token}}
 **Тесты**
 ```js
 // Парсинг ответа и запроса
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 var request_data = request.data;
 ```
 
@@ -503,7 +503,7 @@ auth_token: {{token}}
 **Тесты**
 ```js
 // Парсинг ответа
-var responseJson = JSON.parse(responseBody);
+var responseJson = pm.response.json();
 ```
 
 **1) Можете взять любой объект из присланного списка, используйте js random. В объекте возьмите Cur_ID и передать через окружение в следующий запрос.**
@@ -643,7 +643,7 @@ auth_token: {{token}}
 ```
 ```js
 //1) получить список валют
-var currency = JSON.parse(responseBody);
+var currency = pm.response.json();
 
 //2) итерировать список валют
 currency.forEach((item) => {
