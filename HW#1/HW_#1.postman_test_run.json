@@ -1,0 +1,176 @@
+{
+	"id": "c7c894a5-ef51-42b1-9b14-3406bfa880a7",
+	"name": "HW_#1",
+	"timestamp": "2023-06-06T10:42:42.575Z",
+	"collection_id": "26828403-d3c14f94-d438-43c4-8f8e-5b9d830975d1",
+	"folder_id": 0,
+	"environment_id": "26828403-28a76b43-00b0-4b73-a462-dd6a3b524dc4",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-06-06T10:42:40.825Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "843e391f-3319-4c14-a5d6-8d6b3352531b",
+			"name": "EP_1 /get_method",
+			"url": "http://162.55.220.72:5005/get_method?name=Oleksandr&age=42",
+			"time": 96,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				96
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1c8e42b0-2b94-4797-ba35-7d2d1df140ec",
+			"name": "EP_2 /user_info_3",
+			"url": "http://162.55.220.72:5005/user_info_3",
+			"time": 85,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				85
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "e1b42ae0-14ac-45a2-ba1b-fc904bc796d7",
+			"name": "EP_3 /object_info_1",
+			"url": "http://162.55.220.72:5005/object_info_1?name=Oleksandr&age=42&weight=81",
+			"time": 88,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				88
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5acc249e-7b75-4fb9-8132-98391dbfa816",
+			"name": "EP_4 /object_info_2",
+			"url": "http://162.55.220.72:5005/object_info_2?name=Oleksandr&age=42&salary=500",
+			"time": 83,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				83
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "921a6646-1923-4ee8-aab0-1b5aea557921",
+			"name": "EP_5 /object_info_3",
+			"url": "http://162.55.220.72:5005/object_info_3?name=Oleksandr&age=42&salary=500",
+			"time": 83,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				83
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1f0c7810-c66b-4543-9d65-1d413db3c95f",
+			"name": "EP_6 /object_info_4",
+			"url": "http://162.55.220.72:5005/object_info_4?name=Oleksandr&age=42&salary=500",
+			"time": 78,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				78
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "a6ccec4e-96c9-4b25-8bb4-0ecf371fa6b8",
+			"name": "EP_7 /user_info_2",
+			"url": "http://162.55.220.72:5005/user_info_2",
+			"time": 81,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				81
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 594,
+	"collection": {
+		"requests": [
+			{
+				"id": "843e391f-3319-4c14-a5d6-8d6b3352531b",
+				"method": "GET"
+			},
+			{
+				"id": "1c8e42b0-2b94-4797-ba35-7d2d1df140ec",
+				"method": "POST"
+			},
+			{
+				"id": "e1b42ae0-14ac-45a2-ba1b-fc904bc796d7",
+				"method": "GET"
+			},
+			{
+				"id": "5acc249e-7b75-4fb9-8132-98391dbfa816",
+				"method": "GET"
+			},
+			{
+				"id": "921a6646-1923-4ee8-aab0-1b5aea557921",
+				"method": "GET"
+			},
+			{
+				"id": "1f0c7810-c66b-4543-9d65-1d413db3c95f",
+				"method": "GET"
+			},
+			{
+				"id": "a6ccec4e-96c9-4b25-8bb4-0ecf371fa6b8",
+				"method": "POST"
+			}
+		]
+	}
+}
