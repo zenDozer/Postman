@@ -1,3 +1,13 @@
+************
+# Домашние работы:
+************
+
+- [Postman HOMEWORK 1](https://github.com/zenDozer/Postman/blob/main/HW%231/HW%20%231.md)
+- [Postman HOMEWORK 2](https://github.com/zenDozer/Postman/blob/main/HW%232/HW%20%232.md)
+- [Postman HOMEWORK 3](https://github.com/zenDozer/Postman/blob/main/HW%233/HW%20%233.md)
+
+************
+
 # :large_blue_diamond: Конспект Postman :large_blue_diamond:
 
 ************
