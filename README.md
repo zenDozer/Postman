@@ -1,6 +1,5 @@
-************
 # Домашние работы:
-************
+
 
 - [Postman HOMEWORK 1](https://github.com/zenDozer/Postman/blob/main/HW%231/HW%20%231.md)
 - [Postman HOMEWORK 2](https://github.com/zenDozer/Postman/blob/main/HW%232/HW%20%232.md)
